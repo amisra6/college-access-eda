@@ -1,36 +1,36 @@
-"""EDA for RQ2: cost, aid (Pell share) and selectivity vs completion."""
+"""EDA for Research Question 2: cost, financial aid (Pell share) and selectivity vs completion."""
 
 import os
 import sys
 
 import matplotlib
 matplotlib.use('Agg')
-import matplotlib.pyplot as plt  # noqa: E402
-import pandas as pd  # noqa: E402
-import seaborn as sns  # noqa: E402
-from scipy import stats  # noqa: E402
+import matplotlib.pyplot as plt
+import pandas as pd
+import seaborn as sns
+from scipy import stats
 
-from data_loader import load_raw, load_scorecard, SEL_ORDER  # noqa: E402
+from data_loader import load_raw, load_scorecard, SEL_ORDER
 
 VARS = ['C150_4', 'net_price', 'PCTPELL', 'ADM_RATE']
 OUT_DIR = 'figures'
 
 
 def missing_report(df, cols):
-    """Count and percent missing for the given columns."""
+    """Records count and percent missing for given columns."""
     return pd.DataFrame({'missing': df[cols].isna().sum(),
                          'pct_missing': (df[cols].isna().mean() * 100)
                          .round(1)})
 
 
 def levene_by_group(df, col, group):
-    """Levene's test for equal variances of col across groups."""
+    """This uses Levene's statistical test for equal variances of columns across groups."""
     groups = [g[col].dropna() for _, g in df.groupby(group)]
     return stats.levene(*groups)
 
 
 def group_normality(df, col, group, seed=0):
-    """Shapiro-Wilk p-value per group (sampled to 500 for stability)."""
+    """Tests Shapiro-Wilk p-value test per group, using a sample size of 500)."""
     out = {}
     for name, g in df.groupby(group):
         x = g[col].dropna()
