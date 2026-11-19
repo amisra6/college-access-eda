@@ -1,4 +1,5 @@
-"""Tests for data_loader and eda helpers using tiny hand-made data."""
+"""This performs tests for data_loader and eda helpers
+using a small sample of custom data."""
 
 import io
 import os
