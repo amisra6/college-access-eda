@@ -1,6 +1,6 @@
 # Impact of Socioeconomic Background on Higher Education Access and Academic Success
 
-Authors: Anika Misra, Name 2, Name 3
+Authors: Anika Misra, Marco Capitan, Name 3
 
 ## Project Overview
 Higher education can open doors to academic and career goals, but students don't all have equal access to those opportunities. Factors like household income, socioeconomic background, and race or ethnicity can shape who enrolls in college and who succeeds once there. This project explores how those factors relate to college access and outcomes in the United States, with the goal of highlighting potential barriers and where more support may be needed.
@@ -16,19 +16,24 @@ Our analysis uses the U.S. Department of Education's College Scorecard instituti
 ## Data
 Download the College Scorecard "Most Recent Institution-Level Data" CSV from https://collegescorecard.ed.gov/data/ and place it in the project folder as `Most-Recent-Cohorts-Institution-2.csv`.
 (The file is about 100 MB, so it is not included in this repo.)
-**add other data file sources
+
+Download the NCES table Enrollment weighted average 6-year graduation rates for racial/ethnic groups https://nces.ed.gov/datalab/table/library/detail/3641, and put in project folder.  
 
 ## How to Run
 Run the EDA, which prints results and saves figures to `figures/`:
 
     python eda.py Most-Recent-Cohorts-Institution-2.csv
+    python eda_nces.py
 
 Run the tests:
 
     python test_eda.py
+    python test_ncespy
 
 ## Files
 - `data_loader.py`: loads and cleans the Scorecard data
 - `eda.py`: exploratory data analysis, statistical checks and figures
 - `test_eda.py`: tests for the loading and analysis code
+- 'eda_nces.py': Cleans and exploratory data analysis, for the NCES table
+- 'test_nces.py': Test the clean and analysis code for NCES table
 - ***Team members add other code files once complete
