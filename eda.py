@@ -1,4 +1,5 @@
-"""EDA for Research Question 2: cost, financial aid (Pell share) and selectivity vs completion."""
+"""EDA for Research Question 2: cost, financial aid (Pell share)
+and selectivity vs completion."""
 
 import os
 import sys
@@ -24,13 +25,16 @@ def missing_report(df, cols):
 
 
 def levene_by_group(df, col, group):
-    """This uses Levene's statistical test for equal variances of columns across groups."""
+    """This uses Levene's statistical test for equal variances
+    of columns across groups, which is helpful for result validity."""
     groups = [g[col].dropna() for _, g in df.groupby(group)]
     return stats.levene(*groups)
 
 
 def group_normality(df, col, group, seed=0):
-    """Tests Shapiro-Wilk p-value test per group, using a sample size of 500)."""
+    """Tests Shapiro-Wilk p-value test per group, using a sample size
+    of 500, which is also helpful for result validity and calculating
+    statistical summaries."""
     out = {}
     for name, g in df.groupby(group):
         x = g[col].dropna()
