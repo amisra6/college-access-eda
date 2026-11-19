@@ -1,4 +1,5 @@
-"""This serves to load and clean the College Scorecard data for the Research Question 2 EDA."""
+"""This serves to load and clean the College Scorecard data for the
+Research Question 2 EDA."""
 
 import pandas as pd
 
@@ -33,7 +34,8 @@ def add_type(df):
 
 
 def add_selectivity(df):
-    """Bin ADM_RATE, accounts for missing admission rates to form their own group."""
+    """Bin ADM_RATE, accounts for missing admission rates to form
+    their own group."""
     df = df.copy()
     binned = pd.cut(df['ADM_RATE'], [-0.001, 0.25, 0.5, 0.75, 1.0],
                     labels=SEL_LABELS).astype(object)
@@ -42,7 +44,8 @@ def add_selectivity(df):
 
 
 def load_scorecard(path, four_year_only=True):
-    """Loads raw data, and optionally keep bachelor's-predominant schools."""
+    """Loads raw data, and optionally keep bachelor's-predominant
+    schools."""
     df = load_raw(path)
     if four_year_only:
         df = df[df['PREDDEG'] == 3]
