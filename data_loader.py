@@ -1,4 +1,4 @@
-"""Load and clean the College Scorecard data for the RQ2 EDA."""
+"""This serves to load and clean the College Scorecard data for the Research Question 2 EDA."""
 
 import pandas as pd
 
@@ -13,27 +13,27 @@ SEL_ORDER = SEL_LABELS + [SEL_UNKNOWN]
 
 
 def load_raw(path):
-    """Read only needed columns; PrivacySuppressed/NULL become NaN."""
+    """Reads only needed columns, and PrivacySuppressed/NULL become NaN."""
     return pd.read_csv(path, usecols=COLS, low_memory=False,
                        na_values=['PrivacySuppressed', 'NULL'])
 
 
 def add_net_price(df):
-    """Combine public and private net price into one column."""
+    """This combines public and private net price into one column."""
     df = df.copy()
     df['net_price'] = df['NPT4_PUB'].fillna(df['NPT4_PRIV'])
     return df
 
 
 def add_type(df):
-    """Map CONTROL codes to readable institution types."""
+    """Map CONTROL helps provide readable institution types."""
     df = df.copy()
     df['type'] = df['CONTROL'].map(TYPE_LABELS)
     return df
 
 
 def add_selectivity(df):
-    """Bin ADM_RATE; missing admission rates form their own group."""
+    """Bin ADM_RATE, accounts for missing admission rates to form their own group."""
     df = df.copy()
     binned = pd.cut(df['ADM_RATE'], [-0.001, 0.25, 0.5, 0.75, 1.0],
                     labels=SEL_LABELS).astype(object)
@@ -42,7 +42,7 @@ def add_selectivity(df):
 
 
 def load_scorecard(path, four_year_only=True):
-    """Load raw data, optionally keep bachelor's-predominant schools."""
+    """Loads raw data, and optionally keep bachelor's-predominant schools."""
     df = load_raw(path)
     if four_year_only:
         df = df[df['PREDDEG'] == 3]
